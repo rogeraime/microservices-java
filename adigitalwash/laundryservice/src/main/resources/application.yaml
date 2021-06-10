@@ -1,0 +1,32 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: laundryservice
+  config:
+    location: classpath:/config/
+    
+server:
+  port: 8081
+  allowedOrigin: 8080
+  ip: localhost
+
+authServer:
+  schema: http
+  host: localhost
+  port: 8080
+
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://microservice:thisISthEconnectION2Eureka@${server.ip}:8761/eureka/
+#URL for Token validation
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://${server.ip}:8080/oauth/user
+
+#user for notification service
+notification:
+  admin: notificationAdmin
+  password: 2019n0T1f1C4t10n

@@ -1,0 +1,97 @@
+<div class="row">
+	<div class="filterbar ">
+		<div class="btn-group" role="group" aria-label="weekswitch">
+			<button class="btn btn-default" type="button" (click)="switchAcceptedDate(false);d.close()"
+				aria-haspopup="true" aria-expanded="true">
+				<i class="fa fa-chevron-left" aria-hidden="true"></i>
+			</button>
+			
+			<input readonly autocomplete="off" class="btn btn-default" name="dp" value="{{filterAccepted | date: 'dd.MM.yyyy'}}"
+				ngbDatepicker [dayTemplate]="customDay" [markDisabled]="isDisabled" #d="ngbDatepicker"
+				outsideDays='collapsed' (click)="d.toggle();resetFilter()" autoClose="outside"
+				[(ngModel)]="dateModel">
+			<ng-template #customDay let-date="date" let-disabled="disabled" let-selected="selected">
+				<span class="days" [class.days_of_pickup_the_laundry]="isEnabled(date)" [class.bg-primary]="selected"
+					(click)="saveDate(date)">
+					{{ date.day }}
+				</span>
+			</ng-template>
+
+			<button class="btn btn-default" type="button" (click)="switchAcceptedDate(true); d.close()">
+				<i class="fa fa-chevron-right" aria-hidden="true"></i>
+			</button>
+		</div>
+		<button class="btn btn-default" type="button" (click)="switchTable(); d.close()">
+			<i *ngIf="tableSwitchName == shirtsStr" class='fa fa-chevron-left'></i>
+			{{tableSwitchName}}
+			<i *ngIf="tableSwitchName == nonshirtsStr" class='fa fa-chevron-right'></i>
+		</button>
+		<input type="text" class="form-control" [(ngModel)]="filter" (keyup)="applyFilter()"
+			placeholder="Nach Name oder ID suchen" (click)="this.userService.logoutIfTokenExpired()">
+		<button class="icon filter" mat-icon-button data-toggle="tooltip" data-placement="right" (click)="print()"
+			title="Export Liste 'Andere'">
+			<i class="fa fa-print" aria-hidden="true"></i>
+		</button>
+		<button class="icon filter" mat-icon-button (click)="getLaundriesByDate()" data-toggle="tooltip"
+			data-placement="right" title="Liste aktualisieren">
+			<i class="fa fa-sync-alt" style="font-size: 1em;" aria-hidden="true"></i>
+		</button>
+	</div>
+	<!--TODO Exportlist may not show the cloths correctly and there is an unused export component for this feature!-->
+	<div class="col-xs-12 table-responsive laundry_list">
+		<app-alert message="Leider wurden deine Änderungen nicht abgespeichert. Bitte versuche es später nochmal."
+			alertType="danger" alertId="savingError"></app-alert>
+		<app-alert message="Keine Einträge vorhanden." alertType="danger" alertId="noLaundryToPrint"></app-alert>
+		<!-- Placeholder for a proper switch between deliveryweeks-->
+
+		<table class="table roundcorners borderCollapseSETTING col-xs-12 table-hover"
+			style="margin-bottom:0px; margin-top:16px">
+			<thead class="borderCollapseSETTING color-patches-adessoCOLOR">
+				<tr>
+					<th class="text-center topLeftCornerROUNDED"> Id</th>
+					<th class="text-center">Name</th>
+					<!--th *ngIf="isNonShirtTable" class="text-center">Kleidungsstück</th-->
+					<th *ngIf="!isNonShirtTable" class="text-center topRightCornerROUNDED">Stückzahl</th>
+					<th *ngIf="isNonShirtTable" class="text-center">Stückzahl</th>
+					<th *ngIf="isNonShirtTable" class="text-center">Gesamt</th>
+					<th *ngIf="isNonShirtTable" class="text-center topRightCornerROUNDED">Bezahlt </th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--TODO The list should only show entries submitted within a set timeframe-->
+
+				<ng-container *ngFor="let laundry of aktLaundries">
+					<ng-container *ngIf="isNonShirtTable; else shirtTable">
+						<tr *ngIf="laundry.sumOfClothes != 0 && laundry.totalCost != 0">
+							<td (click)="this.selectedLaundry = laundry; openDetail()" class="text-center pointer">
+								{{laundry.id}}</td>
+							<td (click)="this.selectedLaundry = laundry; openDetail()" class="text-center pointer">
+								{{laundry.laundryOwner}}</td>
+							<td (click)="this.selectedLaundry = laundry; openDetail()" class="text-center pointer">
+								{{getSumOfClothes(laundry)}}</td>
+							<td (click)="this.selectedLaundry = laundry; openDetail()" class="text-center pointer">
+								{{laundry.totalCost | number:'1.2'}}
+								€
+							</td>
+							<td class="text-center">
+								<button class="{{'btn ' + (laundry.paid == laundry.totalCost?'btn-outline-success':(laundry.paid == 0.00? 'btn-outline-danger':'btn-outline-warning'))}}"
+									type="button"
+									(click)="markAsPaid(laundry.id)">{{(laundry.paid == laundry.totalCost?paid:(laundry.paid == 0.00? unpaid:"Restbetrag: " + ((laundry.totalCost - laundry.paid) | number:'1.2') + "€"))}}</button>
+							</td>
+						</tr>
+					</ng-container>
+					<ng-template #shirtTable>
+						<tr *ngIf="laundry.clothes[0].clothCount != 0">
+							<td class="text-center">{{laundry.id}}</td>
+							<td class="text-center">{{laundry.laundryOwner}}</td>
+							<td class="text-center">{{laundry.clothes[0].clothCount}}</td>
+						</tr>
+					</ng-template>
+				</ng-container>
+			</tbody>
+		</table>
+		<p class="textAdminLaundryLIST text-center" *ngIf="isNonShirtTable && nonshirts.length == 0">Keine Wäsche
+			vorhanden!</p>
+		<p class="textAdminLaundryLIST text-center" *ngIf="!isNonShirtTable && shirts.length == 0">Keine Hemden
+			vorhanden!</p>
+	</div>

@@ -1,0 +1,49 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: gateway
+  config:
+    location: classpath:/config/
+server:
+  port: 8080
+  ip: localhost
+
+zuul:
+  ignoredServices: '*'
+  sensitiveHeaders: Cookie, Set-Cookie
+  routes:
+    laundryservice:
+      path: /laundryservice/**
+      serviceId: laundryservice
+      stripPrefix: false
+    adminservice:
+      path: /adminservice/**
+      serviceId: adminservice
+      stripPrefix: false
+    adminservice_export:
+      path: /export/**
+      serviceId: adminservice
+      stripPrefix: false
+      sensitiveHeaders: Set-Cookie
+    authservice:
+      path: /oauth/**
+      serviceId: authservice
+      stripPrefix: false
+    notificationservice:
+      path: /send/**
+      serviceId: notificationservice
+      stripPrefix: false
+    pdfservice:
+      path: /pdfservice/**
+      serviceId: pdfservice
+      stripPrefix: false
+    categoryservice:
+      path: /categoryservice/**
+      serviceId: categoryservice
+      stripPrefix: false
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://microservice:thisISthEconnectION2Eureka@${server.ip}:8761/eureka/

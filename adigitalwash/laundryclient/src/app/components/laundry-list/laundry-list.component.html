@@ -1,0 +1,33 @@
+<app-alert message="Leider wurden deine Änderungen nicht abgespeichert. Bitte versuche es später nochmal." alertType="danger" alertId="savingError"></app-alert>
+<div class="container-fluid" style="margin-top:16px">
+	<p *ngIf="this.laundryService.laundries.length == 0" class="text-center">Keine Wäsche vorhanden</p>
+	<div class="row align-items-start">
+		<!-- Extra Div für Padding als Abstand zwischen cards. Margin zerstört das Grid-System (siehe Bootstrap) -->
+		<div *ngFor="let laundry of laundryService.laundries" class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+			<div class="card roundcorners" [ngStyle]="{'background-color': laundry.fetchedByOwner == true ? '#5cb85c' : '#FFFFFF'}">
+				<!-- Default-Image falls kein Bild hinterlegt -->
+				<button *ngIf="laundryService.isDelivered(laundry)" class="completed {{'btn ' + (laundry.completed?'btn-outline-success':'btn-outline-warning')}}" (click)="markAsCompleted(laundry.id)">
+					<i class="fas {{(!laundry.completed?'fa-dolly':'fa-check')}}"></i>
+        		</button>
+				<img [src]="(laundry.image == '' ? defaultLaundryImage : laundry.image)" class="card-img-top center-cropped roundcornerstop" alt="...">
+  				<div class="card-body">
+					<h5 class="card-title">ID: {{laundry.id}}</h5>
+    				<div class="card-text">
+						<p>Abholbereit ab: {{laundry.deliveryDate |  date:'dd.MM.yyyy'}}</p>
+						<p>Preis: {{laundry.totalCost| number:'1.2'}} €</p>
+					</div>
+					<button class="btn btn-default btn-detail" (click)="this.detailLaundry = laundry; open('LaundryDetailModalComponent')" data-backdrop="false">Detailansicht öffnen</button>
+					<button class="btn btn-default btn-edit" [disabled]="!laundryService.isEditable(laundry)" type="button" (click)="this.editLaundry = laundry; open('LaundryEditModalComponent');">
+						<i class="far fa-edit" aria-hidden="true"></i>
+					</button>
+					<button class="btn btn-outline-danger btn-delete" [disabled]="!laundryService.isEditable(laundry)" type="button" (click)="this.deleteLaundry = laundry; open('LaundryDeleteModalComponent');">
+						<i class="far fa-trash-alt" aria-hidden="true"></i>					
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button class="btn btn-primary btn-add rounded-circle" [disabled]="laundryService.gotLaundryThisWeek" (click)="open('LaundryCreateModalComponent')">
+		<i class="fa fa-plus" aria-hidden="true"></i>
+	</button>
+</div>

@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8761}
+  ip: localhost
+
+spring:
+  profiles:
+    active:
+    - dev
+    - test
+  application:
+    name: discoveryservice
+
+  cloud:
+    config:
+      discovery:
+        service-id: config-service
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://microservice:thisISthEconnectION2Eureka@${server.ip}:8761/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0    
+    

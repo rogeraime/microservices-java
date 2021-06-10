@@ -1,0 +1,53 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: gateway
+  config:
+    location: classpath:/config/
+server:
+  port: 8080
+#  ssl:
+#    key-store: src/main/resources/ssl/keystore.p12
+#    key-store-password: digiwash
+#    keyStoreType: PKCS12
+#    keyAlias: digiwash
+zuul:
+  ignoredServices: '*'
+  routes:
+    laundryservice:
+      path: /laundryservice/**
+      serviceId: laundryservice
+      stripPrefix: false
+      sensitiveHeaders: false
+    adminservice_adminservice:
+      path: /adminservice/**
+      serviceId: adminservice
+      stripPrefix: false
+      sensitiveHeaders: false
+    adminservice_export:
+      path: /export/**
+      serviceId: adminservice
+      stripPrefix: false
+      sensitiveHeaders: false
+    authentificationservice:
+      path: /oauth/**
+      serviceId: authentificationservice
+      stripPrefix: false
+      sensitiveHeaders: false
+    notificationservice:
+      path: /send/**
+      serviceId: notificationservice
+      stripPrefix: false
+      sensitiveHeaders: false
+    pdfservice:
+      path: /pdfservice/**
+      serviceId: pdfservice
+      stripPrefix: false
+      sensitiveHeaders: false
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      

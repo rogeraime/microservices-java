@@ -1,0 +1,54 @@
+<div class="modal-body">
+	<div class="container">
+		<div class="row align-items-center">
+			<ul class="col text-center">
+				<h6>Erstellt am: {{laundry.submissionDate | date:'dd.MM.yyyy'}}</h6>
+				<h6>Abholbereit ab: {{laundry.deliveryDate | date:'dd.MM.yyyy'}}</h6>
+				<h6>Preis: {{laundry.totalCost}} €</h6>
+			</ul>
+			<img *ngIf="laundry.image != ''" class="col detailimg" [src]="laundry.image" alt="">
+		</div>
+	</div>
+	<table class="table roundcorners borderCollapseSETTING" id="laundry_detail_{{laundry.id}}">
+		<thead class="borderCollapseSETTING color-patches-adessoCOLOR">
+			<tr>
+				<th class="topLeftCornerROUNDED" style="border-bottom-width: 0px">Typ</th>
+				<th class="text-center" style="border-bottom-width: 0px">Anzahl</th>
+				<th class="text-right topRightCornerROUNDED" style="border-bottom-width: 0px">Kosten</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let cloth of laundry.clothes">
+				<tr *ngIf="cloth.clothCount !=0">
+					<td>
+						<span *ngFor="let cat of allCategories">
+							<span *ngIf="cat.id===cloth.categoryId">{{ cat.name }}</span>
+						</span>
+					</td>
+					<td class="text-center">{{cloth.clothCount}}</td>
+					<td class="text-right">{{cloth.costs}}€</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th class="bottomLeftCornerROUNDED">Gesamt</th>
+				<th class="text-center">{{calcClothAmount()}}</th>
+				<th class="text-right bottomRightCornerROUNDED">{{laundry.totalCost}}€</th>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+<div class="modal-footer">
+	<div class="col-xs-8 text-left" id="buttonORDER">
+		<button *ngIf="deletable" class="btn btn-outline-danger modal-footer-Button-WIDTH" id="deleteBUTTON"
+			type="button" [disabled]="!laundryService.isEditable(this.laundry)"
+			(click)="this.selectedLaundry = laundry;activeModal.close('Close click');deleteLaundry();">
+			<i class="far fa-trash-alt" aria-hidden="true"></i>
+		</button>
+		<button class="btn btn-default modal-footer-Button-WIDTH" id="closeBUTTON"
+			(click)="activeModal.close('Close click');">
+			Schließen
+		</button>
+	</div>
+</div>

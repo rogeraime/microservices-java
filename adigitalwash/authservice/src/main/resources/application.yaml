@@ -1,0 +1,54 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: authservice
+  config:
+    location: classpath:/config/
+
+server:
+  port: 8083
+  allowedOrigin: 8080
+  ip: localhost
+#ldapsearch -H "ldap://ldap01.adesso.local:3268/" -x -D "ldap-DigiWash" -w "n4aY7u6uX3" -b "dc=adesso,dc=local" -s sub 'sAMAccountName=selzer' 
+ldap:
+  ## LDAP base DN
+  baseDn: dc=adesso,dc=local
+  ## LDAP DN for technical user
+  bindDn: ldap-DigiWash 
+  ## LDAP password of technical user
+  password: n4aY7u6uX3
+  user:
+    ## LDAP search filter to identify account name
+    namePattern: sAMAccountName={0}
+    ## LDAP user-attribute which defines name
+    nameAttribute: name
+    ## LDAP user-attribute which defines group-membership
+    roleAttribute: memberOf
+    ## LDAP user-attribute which defines mailAddress
+    mailAttribute: mail
+  ## LDAP server URL
+  group:
+    searchBase: OU=Gruppen
+  server: ldap://ldap01.adesso.local:3268/ #ldap://localhost:10389/
+
+notification: #user for notification service
+  admin: notificationAdmin
+  password: 2019n0T1f1C4t10n
+  role: SENDMAIL
+
+authenticate:
+  user: authUser
+  password: 2019sfsdfr§ete47?
+  role: AUTHENTICATE
+  
+client:
+  laundryclient:
+    scopes: laundry-verwaltung
+    accessTokenValiditySeconds: 600
+    refreshTokenValiditySeconds: 86400
+  
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://microservice:thisISthEconnectION2Eureka@${server.ip}:8761/eureka/

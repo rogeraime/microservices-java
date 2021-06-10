@@ -1,0 +1,49 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav class="sidenav text-white" #sidenav mode="over">
+    <mat-nav-list *ngIf="username">
+      <p class="item">
+        <i class="fa fa-user" aria-hidden="true" *ngIf="userService.isUser()"></i>
+      </p>
+      <p class="item"> Hallo {{username}}!</p>
+      <mat-divider></mat-divider>
+      <a class="item" mat-list-item (click)="sidenav.toggle(); openClothCategory();">
+        Preise
+      </a>
+      <mat-divider></mat-divider>
+      <a class="item" mat-list-item *ngIf="userService.isAdmin()" (click)="sidenav.toggle(); redirectToLaundry()">
+        Eigene Wäscheliste
+      </a>
+      <mat-divider *ngIf="userService.isAdmin()"></mat-divider>
+      <a class="item" mat-list-item *ngIf="userService.isAdmin()" (click)="sidenav.toggle(); redirectToAdmin()">
+        Admin Seite
+      </a>
+      <mat-divider *ngIf="userService.isAdmin()"></mat-divider>
+      <a class="item" mat-list-item *ngIf="username" (click)="sidenav.toggle(); this.userService.logout()">
+        <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
+      </a>
+      <mat-divider></mat-divider>
+      <p class="item paddingE-MailNOTIFICATION" mat-list-item>E-Mail-Benachrichtigung</p>
+      <div class="buttonSendMailPOSITION">
+        <button class="{{'btn ' + (sendMail?'btn-outline-success':'btn-outline-danger')}}"
+          (click)="toggleNotification()">{{(sendMail?on:off)}}
+        </button>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="header">
+      <button id="menu-left" mat-icon-button (click)="sidenav.toggle();this.userService.logoutIfTokenExpired()" *ngIf="this.userService.isLoggedIn()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+
+      <div id="head-right">
+        <a class="item pointer" (click)="redirectToLaundry()">
+          <img class="logo" src="{{logo}}" width=125 />
+        </a>
+      </div>
+
+    </div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

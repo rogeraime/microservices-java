@@ -1,0 +1,11 @@
+<div class="modal-dialog" role="document" id="modalDIALOG">
+  <div class="modal-content" id="modalContentWIDTH">
+      <button type="button" class="close closeButtonPositionRIGHT"(click)="activeModal.dismiss('Cross click')" aria-label="Close">
+          <span class="float-right" aria-hidden="true" style="padding-right:15px ; padding-top: 10px">&times;</span>
+        </button>
+    <div class="modal-header clothCategoryModalHEADER" id="modalHEADER">
+      <h4 class="modal-title" id="LaundryDetailsTITLE">{{headline}}</h4>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>

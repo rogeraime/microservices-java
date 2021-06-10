@@ -1,0 +1,104 @@
+.laundry_list {
+	/*max-height: 500px;*/
+	overflow: auto;
+}
+
+.toolbar {
+	padding: 10px 0px;
+}
+
+.filterbar{
+	width: 100%;
+    text-align: center;
+    padding: 0px 0px 10px 0;
+    background-color: white;
+}
+
+.fab{
+	top: auto !important;
+	right: 20px !important;
+	bottom: 10px !important;
+	left: auto !important;
+	position: fixed !important;
+	z-index: 99 !important;
+
+}
+
+.list_control {
+	width: 45px;
+}
+
+mat-grid-list{
+	height: 100%;
+	margin-top: 6em;
+}
+
+.row {
+	padding: 0px 0px;
+	margin: 0 0;
+
+}
+
+.icon{
+	background-color: white;
+	font-weight: bold;
+	margin-top: 1em 0em 0em 5em;
+}
+
+.table-responsive{
+	overflow-y: hidden;
+	padding: 0px 5px;
+	padding-top: 5px;
+}
+
+tbody{
+	background-color: white;
+	border-top: 0;
+}
+
+th {
+	border-bottom: 0 !important;
+}
+
+.form-control{
+	display: inline-block;
+	width: auto;
+	min-width: 300px;
+}
+  
+.form-control {
+	padding-top: 0px;
+	padding-bottom: 6px;
+	height: 38px;
+	border-radius: 0.25rem; 
+	border-color: rgb(136, 130, 121); 
+  }
+
+  button.icon.filter {
+	  top:4px !important;
+	  margin-top: 0px !important;
+	  height: 38px !important;
+	  border-radius: 0.25rem !important; 
+	  border-color: rgb(136, 130, 121) !important; 
+	  border-width: 1px !important; 
+}
+
+/*DATEPICKER CSS*/
+.days{
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    width: 2rem;
+    color: #E8E4E1;
+}
+
+.days_of_pickup_the_laundry:hover {
+    background-color: #857971;
+}
+
+.days_of_pickup_the_laundry {
+    background-color: #0071B9;
+    border-radius: 1rem;
+    color: white;
+}

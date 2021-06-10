@@ -1,0 +1,40 @@
+<div class="modal-body">
+	<table class="table roundcorners borderCollapseSETTING">
+		<thead class="borderCollapseSETTING color-patches-adessoCOLOR">
+			<th class="text-center topLeftCornerROUNDED" style="border-bottom-width: 0px">
+				<h5>Typ</h5>
+			</th>
+			<th class="text-center" style="border-bottom-width: 0px">
+				<h5>Anzahl</h5>
+			</th>
+			<th class="text-center text-right topRightCornerROUNDED" style="border-bottom-width: 0px">
+				<h5>Preis/ Stück</h5>
+			</th>
+		</thead>
+		<ng-container *ngFor="let cat of allCategories">
+		<tr *ngIf="cat.active">
+			<td class="text-center">{{cat.name}}</td>
+			<td class="text-center flexiblePlusMinusBUTTONS">
+				<button type="button" class="btn btn-outline-danger" (click)="decrementCategoryCount(cat.id-1)">-</button>
+				<input class="amount_input" type="text" [(ngModel)]="categoryCount[cat.id-1]" disabled="disabled" id="amount_ctrl_{{cat.id}}">
+				<button type="button" class="btn btn-outline-success" (click)="incrementCategoryCount(cat.id-1)">+</button>
+			</td>
+			<td class="text-center">{{cat.price | number:'1.2'}}€ /Stk</td>
+		</tr>
+		</ng-container>
+	</table>
+	<div class="input-group">
+		<label class="input-group-btn">
+			<span class="btn btn-default browseBorderSETTING">
+				Bild hinzufügen<input type="file" style="display: none;" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" (change)="addImage($event)">
+			</span>
+		</label>
+		<input type="text" class="form-control" [value]="fileName" readonly style="border-radius: 6px; margin-left: 2px;">
+	</div>
+	<!--input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" (change)="addImage($event)"-->
+	<app-alert message="Du kannst keinen leeren Beutel abgeben." alertType="danger" alertId="laundryEmpty"></app-alert>
+</div>
+<div class="modal-footer" >
+	<button type="button" class="btn btn-default modal-footer-Button-WIDTH" id="closeBUTTON" (click)="activeModal.close('Close click')">Abbrechen</button>
+	<button type="button" class="btn btn-outline-success modal-footer-Button-WIDTH" id="saveBUTTON" (click)="addOrUpdateLaundry();">Speichern</button>
+</div>

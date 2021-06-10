@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: gatewayservice
+  cloud:
+      discovery:
+        healthCheckPath: /monitor/health
+        healthCheckInterval: 15s
+      config:
+        enabled: true
+        format: YAML
+        prefix: config
+        discovery: 
+          service-id: config-service
+management:
+  context-path: /monitor

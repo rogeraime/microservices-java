@@ -1,0 +1,42 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: authentificationservice
+  config:
+    location: classpath:/config/
+
+server:
+  port: 8083
+
+ldap:
+  ## LDAP base DN
+  baseDn: dc=adesso,dc=local
+  ## LDAP DN for technical user
+  bindDn: ldap-DigiWash 
+  ## LDAP password of technical user
+  password: n4aY7u6uX3
+  user:
+    ## LDAP search filter to identify account name
+    namePattern: sAMAccountName={0}
+    ## LDAP user-attribute which defines name
+    nameAttribute: name
+    ## LDAP user-attribute which defines group-membership
+    roleAttribute: memberOf
+    ## LDAP user-attribute which defines mailAddress
+    mailAttribute: mail
+  ## LDAP server URL
+  group:
+    searchBase: OU=Gruppen
+  server: ldap://ldap01.adesso.local:3268/ #ldap://localhost:10389/
+
+client:
+  laundryclient:
+    scopes: laundry-verwaltung
+    accessTokenValiditySeconds: 600
+    refreshTokenValiditySeconds: 86400
+  
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,27 @@
+[
+{
+	"context": "/oauth",
+    "target": "http://localhost:8080",
+    "secure": false
+},
+{
+	"context": "/laundryservice",
+    "target": "http://localhost:8080",
+    "secure": false
+},
+{
+	"context": "/adminservice",
+	"target": "http://localhost:8080",
+	"secure": false
+},
+{
+	"context": "/export",
+	"target": "http://localhost:8080",
+	"secure": false
+},
+{
+	"context": "/categoryservice",
+	"target": "http://localhost:8080",
+	"secure": false
+}
+]

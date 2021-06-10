@@ -1,0 +1,22 @@
+spring:
+  profiles:
+     active: native
+  application:
+    name: pdfservice
+  config:
+    location: classpath:/config/
+
+server:
+  port: 8088
+  allowedOrigin: 8080
+  ip: localhost
+
+eureka:
+  client:
+   serviceUrl:
+    defaultZone: http://microservice:thisISthEconnectION2Eureka@${server.ip}:8761/eureka/
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://${server.ip}:8080/oauth/user

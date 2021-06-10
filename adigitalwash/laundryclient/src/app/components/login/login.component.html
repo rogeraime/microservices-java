@@ -1,0 +1,29 @@
+<app-alert message="Benutzername oder Passwort falsch!" alertType="danger" alertId="login" alertDismiss="false"></app-alert>
+<div class="container flex-row">
+	<div class="row flex-column justify-content-center">
+		<div class="p10 roundcorners bg-white">
+			<div class="heading">
+				<h2>Login</h2>
+			</div>
+			<div class="body">
+				<form class="form-horizontal" [formGroup]="this.loginFormControl" (ngSubmit)="submit()">
+					<div class="form-group">
+						<label for="input_username" class="control-label"><i class="fa fa-user" aria-hidden="true"></i> Benutzername</label>
+						<input type="email" name="username" class="form-control" id="input_username" formControlName="username" placeholder="Benutzername">
+					</div>
+					<div class="form-group">
+						<label for="input_password" class="control-label"><i class="fa fa-key" aria-hidden="true"></i> Passwort</label>
+						<input type="password" name="password" class="form-control"  formControlName="pwd" id="input_password" placeholder="Passwort">
+					</div>
+					<div class="form-group">
+						<input type="checkbox" name="rememberMe" id="input_rememberMe" formControlName="rememberMe">
+						<label for="input_rememberMe" class="control-label">Eingeloggt bleiben?</label>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-outline-primary" [disabled]="!this.loginFormControl.valid">Anmelden</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,336 @@
+.container{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+/* Fixiert die Position */
+.fixed{
+	position: fixed !important;
+}
+
+.p10{
+  padding: 10%;
+}
+
+.roundcorners{
+  border-radius: 1em !important; 
+}
+
+table {
+  border-radius: 4px;
+}
+
+.roundcornerstop {
+  border-top-left-radius: 1em !important;
+  border-top-right-radius: 1em !important;
+}
+
+body{
+  background-color: rgb(232,228,225);
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+
+.btn-default {
+  color: rgb(136,130,121);
+  background-color: transparent;
+  border-color: rgb(136,130,121) !important;
+  border-width: 1px;
+}
+
+.btn-default:hover {
+  color: white;
+  background-color: rgb(136,130,121);
+}
+
+.btn-default:disabled, .btn-default:hover:disabled {
+  color: #E8E4E1;
+  background-color: transparent;
+  border-color: #E8E4E1 !important;
+}
+
+.btn-outline-primary {
+  color: rgb(0,110,199) !important;
+  background-color: white !important;
+  border-color: rgb(0,110,199) !important;
+  border-width: 2px !important;
+}
+
+.btn-outline-primary:hover {
+  color: white !important;
+  background-color: rgb(0,110,199) !important;
+}
+
+.btn-outline-primary:disabled, .btn-outline-primary:hover:disabled {
+  color: rgb(0,110,199) !important;
+  background-color: white !important;
+  border-color: rgb(0,110,199) !important;
+  border-width: 2px !important;
+}
+
+.btn-outline-secondary {
+  color: rgb(136,130,121);
+  background-color: transparent;
+  border-color: rgb(136,130,121) !important;
+  border-width: 2px;
+}
+
+.btn-outline-secondary:hover {
+  color: white;
+  background-color: rgb(136,130,121);
+}
+
+.btn-outline-secondary:disabled, .btn-outline-secondary:hover:disabled {
+  color: rgb(136,130,121);
+  background-color: transparent;
+  border-color: rgb(136,130,121) !important;
+  border-width: 2px;
+}
+
+.btn-outline-danger:disabled{
+  color: rgb(255, 168, 153);
+  background-color: transparent;
+  border-color: rgb(255, 168, 153) !important;
+}
+
+.btn-outline-warning:hover {
+  color: white;
+}
+
+/*Modal design*/
+
+#buttonORDER {
+  display: contents;
+ margin: 0px;
+}
+
+
+.modal-footer {
+	border-top-width: 0px;
+}
+
+/*deleteButtonWIDTH*/
+.modal-footer-Button-WIDTH{
+ width: 100%;
+}
+
+#deleteBUTTON {
+  margin-right: 3px;
+  border-width: 1px;
+}
+
+#closeBUTTON {
+  margin-left: 3px;
+}
+
+#saveBUTTON {
+  margin-left: 1px;
+}
+
+#infoICON {
+  color: rgb(0,110,199);
+  font-size: 1rem !important;
+}
+
+.info {
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+  font-size: 0.8rem;
+}
+
+#LaundryDetailsTITLE {
+  /*   padding-left: 75px;*/
+  text-align: center;
+  display: block;
+  margin: auto;
+ }
+ 
+ #modalHEADER {
+     border-bottom: 0px;
+     margin-top: 10px;
+ }
+ 
+ #modalContentWIDTH {
+     border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-right-width: 0px;
+ }
+ 
+ #modalDIALOG{
+     margin-top: 0px;
+     margin-bottom: 0px;
+ }
+ 
+ .borderCollapseSETTING {
+   border-collapse: separate;
+   border-spacing: 0px;
+ }
+ 
+ .color-patches-adessoCOLOR{
+   background-color: rgb(0,110,199) !important;
+   color: white !important;
+ }
+ 
+ .topLeftCornerROUNDED {
+   border-top-left-radius: 12px !important; 
+ }
+ 
+ .topRightCornerROUNDED {
+   border-top-right-radius: 12px ; 
+ }
+ 
+ .bottomLeftCornerROUNDED {
+   border-bottom-left-radius: 12px !important;
+ }
+ 
+ .bottomRightCornerROUNDED {
+   border-bottom-right-radius: 12px !important;
+ }
+ 
+ .table-bordered td {
+   border: 1px solid(transparent);
+ }
+ 
+ .table-bordered thead {
+   border: 1px solid (transparent);
+ }
+ 
+ .table-bordered th {
+   border: 1px solid rgb (transparent);
+ }
+ 
+ .browseBorderSETTING {
+	border-radius: 6px;
+	margin-right: 6px; 
+}
+
+#create-table-footer {
+	background-color: rgb(136,130,121);
+	font-size: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+	min-height:5em;
+	border: 0;
+	border-bottom-right-radius: 1em;
+	border-bottom-left-radius: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#create-table-right {
+	text-align: right;
+}
+#create-table-left {
+	text-align: left;
+}
+
+.amount_input {
+	width: 45px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid grey;
+    height: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.price_input {
+  width: 75px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid grey;
+    height: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.category_input {
+  width: 125px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid grey;
+    height: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+#topRightCornerROUNDED{
+  border-top-right-radius: 12px !important;
+}
+
+.clothCategoryHeaderBORDER-WIDTH {
+  border-bottom-width: 0px !important;
+}
+
+.modal-footer-ClothCategory-Button-WIDTH {
+  width: 100% !important;
+}
+
+.clothCategoryModalHEADER {
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+.textAdminLaundryLIST {
+  margin-bottom: 0px;
+  padding-top: 20px;
+}
+
+.modal-content {
+  border-radius: 12px !important;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+
+.closeButtonPositionRIGHT {
+  align-self: flex-end !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0; 
+}
+.flexiblePlusMinusBUTTONS {
+white-space: nowrap;
+}
+
+.detailimg {
+  max-height: 200px;
+  object-fit: scale-down;
+}
+
+.buttonSendMailPOSITION {
+  text-align: center !important;
+}
+
+.paddingE-MailNOTIFICATION {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.completed {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  height: auto !important;
+  width: 1.5rem !important;
+  padding: 0;
+}

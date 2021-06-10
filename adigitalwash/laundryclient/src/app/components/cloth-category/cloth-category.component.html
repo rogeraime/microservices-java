@@ -1,0 +1,79 @@
+<div class="modal-body clothCategoryModalHEADER">
+	<table class="table roundcorners borderCollapseSETTING">
+		<thead class="borderCollapseSETTING color-patches-adessoCOLOR">
+			<th class="text-center topLeftCornerROUNDED clothCategoryHeaderBORDER-WIDTH">
+				<h5>Kleidungsstück</h5>
+			</th>
+			<th *ngIf="!userService.isAdmin() || !isInEditMode"
+				class="text-center topRightCornerROUNDED clothCategoryHeaderBORDER-WIDTH">
+				<h5>Preis/Stück</h5>
+			</th>
+			<th *ngIf="userService.isAdmin() && isInEditMode" class="text-center clothCategoryHeaderBORDER-WIDTH">
+				<h5>Preis/Stück</h5>
+			</th>
+			<th *ngIf="userService.isAdmin() && isInEditMode"
+				class="text-center topRightCornerROUNDED clothCategoryHeaderBORDER-WIDTH">
+				<h5>Aktiv?</h5>
+			</th>
+		</thead>
+		<ng-container *ngFor="let cat of allCategories">
+			<ng-container *ngIf="!isInEditMode; else editMode">
+				<tr *ngIf="cat.active">
+					<td class="text-center">{{cat.name}}</td>
+					<td class="text-center">{{cat.price | number:'1.2'}}
+						€/Stk
+					</td>
+				</tr>
+			</ng-container>
+			<ng-template #editMode>
+				<tr>
+					<td class="text-center">
+						<i *ngIf="cat.active != cat.activeCache" class="fa fa-comment-medical" id="infoICON"></i>
+						<i *ngIf="cat.price != cat.priceCache && cat.active == cat.activeCache" class="fa fa-comment-dollar" id="infoICON"></i>
+						<input required class="category_input" type="text" [(ngModel)]="cat.name">
+					</td>
+					<td class="text-center">
+						<input required class="price_input" type="number" step="0.01" [(ngModel)]="cat.priceCache">
+						€/Stk
+					</td>
+					<td class="text-center">
+						<button class="{{'btn ' + (cat.activeCache?'btn-outline-success':'btn-outline-danger')}}"
+							(click)="cat.activeCache = !cat.activeCache">{{(cat.activeCache?active:inactive)}}
+						</button>
+					</td>
+				</tr>
+			</ng-template>
+		</ng-container>
+		<tr *ngIf="isInEditMode">
+			<td class="text-center">
+				<input class="category_input" type="text" placeholder="Neu" [(ngModel)]="newCategory.name">
+			</td>
+			<td class="text-center">
+				<input class="price_input" type="number" step="0.01" placeholder="0"
+					[(ngModel)]="newCategory.priceCache">
+				€/Stk
+			</td>
+			<td class="text-center">
+				<button class="btn btn-default" type="button" (click)="addCategory()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+				</button>
+			</td>
+		</tr>
+		<tr *ngIf="isInEditMode">
+			<td colspan="3" class="info">
+				<p class="info"><i class="fa fa-comment-medical" id="infoICON"></i> Änderungen gültig ab nächstem {{getWeekDaysAsFullTextGerman()}}</p>
+				<p class="info"><i class="fa fa-comment-dollar" id="infoICON"></i> Preis gültig ab nächstem {{getWeekDaysAsFullTextGerman()}}</p>
+			</td>
+		</tr>
+	</table>
+	<app-alert message="Bitte fülle alle Felder aus!" alertType="danger" alertId="category"></app-alert>
+</div>
+<div class="modal-footer">
+	<button type="button" *ngIf="userService.isAdmin() && !isInEditMode"
+		class="btn btn-default modal-footer-ClothCategory-Button-WIDTH" (click)="switchMode()">Bearbeiten</button>
+	<button type="button" class="btn btn-default modal-footer-ClothCategory-Button-WIDTH"
+		(click)="this.activeModal.close('Close click')">Abbrechen</button>
+	<button type="button" *ngIf="userService.isAdmin() && isInEditMode"
+		class="btn btn-outline-success modal-footer-ClothCategory-Button-WIDTH" id="saveBUTTON"
+		(click)="updateCategories();">Speichern</button>
+</div>
